@@ -16,7 +16,7 @@ public class DAO {
 	private ResultSet resultSet = null;
 
 	public DAO() {
-		
+
 		java.io.InputStream inputstream = this.getClass().getResourceAsStream("/db.properties");
 		java.util.Properties properties = new Properties();
 		try {
@@ -25,14 +25,14 @@ public class DAO {
 			System.out.println("No se pudieron cargar las propiedades desde el archivo");
 			e.printStackTrace();
 		}
-		
+
 		String driver = properties.getProperty("db.driver");
 		String host = properties.getProperty("db.host");
 		String port = properties.getProperty("db.port");
 		String user = properties.getProperty("db.username");
 		String password = properties.getProperty("db.password");
 		String db = properties.getProperty("db.name");
-		
+
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
@@ -48,40 +48,44 @@ public class DAO {
 		}
 	}
 
-	public void read() throws Exception {
+	public void read(){
 		try {
-			//Class.forName(DRIVER);
-			//connection = DriverManager.getConnection(URL+"?user="+USERNAME+"&password="+PASSWORD);
-			//statement = connection.createStatement();
-			System.out.println("Conexión exitosa");
+
 		} catch(Exception e) {
-			throw e;
+			System.out.println("Error en la lectura de base de datos");
+			e.printStackTrace();
 		} finally{
-			close();
+			closeConnection();
 		}
 	}
 
-	public void write(ResultSet result) throws SQLException {
-		while (result.next()){
+	public void write(ResultSet result) {
+		try {
+			while (result.next()){
 
+			}
+		} catch(Exception e) {
+			System.out.println("Error en la lectura de base de datos");
+			e.printStackTrace();
+		} finally{
+			closeConnection();
 		}
+		
 	}
 
-	private void close() {
+	private void closeConnection() {
 		try {
 			if (resultSet != null) {
 				resultSet.close();
 			}
-
 			if (statement != null) {
 				statement.close();
 			}
-
 			if (connection != null) {
 				connection.close();
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 }
