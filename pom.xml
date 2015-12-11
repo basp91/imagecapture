@@ -9,13 +9,14 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>imagecapture</name>
 
+
 	<properties>
 		<db.driver>com.mysql.jdbc.Driver</db.driver>
 		<db.username></db.username>
 		<db.password></db.password>
 		<db.host>localhost</db.host>
 		<db.port>3306</db.port>
-
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
@@ -37,20 +38,9 @@
 		</dependency>
 		<dependency>
 			<groupId>com.jgoodies</groupId>
-			<artifactId>jgoodies-forms</artifactId>
-			<version>1.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jgoodies</groupId>
-			<artifactId>jgoodiesforms</artifactId>
-			<version>1.5.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jgoodies</groupId>
 			<artifactId>forms</artifactId>
 			<version>1.2.1</version>
 		</dependency>
-		
 	</dependencies>
 
 	<build>
@@ -58,7 +48,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -67,11 +56,10 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0-alpha-2</version>
 				<executions>
 					<execution>
 						<id>database-properties-file</id>
-						<phase>generate-resources</phase>
+						<phase>post-clean</phase>
 						<goals>
 							<goal>write-project-properties</goal>
 						</goals>
@@ -82,6 +70,20 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>properties-maven-plugin</artifactId>
+					<version>1.0-alpha-2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>

@@ -3,3 +3,4 @@ output/
 .settings
 **/*.zip
 **/*.jar
+**/*.png

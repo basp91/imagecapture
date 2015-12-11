@@ -23,7 +23,7 @@ public class DAO {
 
 
 	public DAO() throws IOException {
-		java.io.InputStream inputstream = this.getClass().getResourceAsStream("db.properties");
+		java.io.InputStream inputstream = this.getClass().getResourceAsStream("/db.properties");
 		java.util.Properties properties = new Properties();
 		properties.load(inputstream);
 
@@ -32,11 +32,12 @@ public class DAO {
 		PORT = properties.getProperty("db.port");
 		USERNAME = properties.getProperty("db.username");
 		PASSWORD = properties.getProperty("db.password");
+		System.out.println(DRIVER+HOST+PORT+USERNAME+PASSWORD);
+
 	}
 
 	public void read() throws Exception {
 		try {
-			System.out.println(DRIVER+HOST+PORT+USERNAME+PASSWORD);
 			//Class.forName(DRIVER);
 			//connection = DriverManager.getConnection(URL+"?user="+USERNAME+"&password="+PASSWORD);
 			//statement = connection.createStatement();

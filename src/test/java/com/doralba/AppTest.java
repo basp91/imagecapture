@@ -40,10 +40,4 @@ public class AppTest
         assertTrue( true );
     }
     
-	public void testLengthOfTheUniqueKey() {
-
-		App obj = new App();
-		Assert.assertEquals(36, obj.generateUniqueKey().length());
-
-	}
 }
