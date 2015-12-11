@@ -16,6 +16,7 @@
 		<db.password></db.password>
 		<db.host>localhost</db.host>
 		<db.port>3306</db.port>
+		<db.name></db.name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 

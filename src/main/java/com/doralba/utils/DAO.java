@@ -15,25 +15,37 @@ public class DAO {
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 
-	private static String DRIVER;
-	private static String HOST;
-	private static String PORT;
-	private static String USERNAME;
-	private static String PASSWORD;
-
-
-	public DAO() throws IOException {
+	public DAO() {
+		
 		java.io.InputStream inputstream = this.getClass().getResourceAsStream("/db.properties");
 		java.util.Properties properties = new Properties();
-		properties.load(inputstream);
-
-		DRIVER = properties.getProperty("db.driver");
-		HOST = properties.getProperty("db.host");
-		PORT = properties.getProperty("db.port");
-		USERNAME = properties.getProperty("db.username");
-		PASSWORD = properties.getProperty("db.password");
-		System.out.println(DRIVER+HOST+PORT+USERNAME+PASSWORD);
-
+		try {
+			properties.load(inputstream);
+		} catch (IOException e) {
+			System.out.println("No se pudieron cargar las propiedades desde el archivo");
+			e.printStackTrace();
+		}
+		
+		String driver = properties.getProperty("db.driver");
+		String host = properties.getProperty("db.host");
+		String port = properties.getProperty("db.port");
+		String user = properties.getProperty("db.username");
+		String password = properties.getProperty("db.password");
+		String db = properties.getProperty("db.name");
+		
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			System.out.println("MySQL driver not found");
+			e.printStackTrace();
+		}
+		try {
+			String connection_address = "jdbc:mysql://"+host+":"+port+"/"+db;
+			connection = DriverManager.getConnection(connection_address, user, password);
+		} catch (SQLException e) {
+			System.out.println("No se pudo establecer la conexión con la base de datos");
+			e.printStackTrace();
+		}
 	}
 
 	public void read() throws Exception {
